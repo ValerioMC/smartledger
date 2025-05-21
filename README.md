@@ -62,7 +62,7 @@ The application will start on port 8080 by default.
 Once the application is running, you can access the Swagger UI to explore and test the API:
 
 ```
-http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui/index.html
 ```
 
 ## Authentication
