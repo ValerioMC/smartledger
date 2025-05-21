@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="03" author="smartledger">
+        <!-- Create categories table -->
+        <createTable tableName="categories">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="color" type="VARCHAR(7)"/>
+            <column name="icon" type="VARCHAR(50)"/>
+            <column name="parent_id" type="BIGINT">
+                <constraints foreignKeyName="fk_categories_parent_id" references="categories(id)"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints foreignKeyName="fk_categories_user_id" references="users(id)"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+        </createTable>
+
+        <!-- Create indexes -->
+        <createIndex tableName="categories" indexName="idx_categories_user_id">
+            <column name="user_id"/>
+        </createIndex>
+        <createIndex tableName="categories" indexName="idx_categories_parent_id">
+            <column name="parent_id"/>
+        </createIndex>
+        <createIndex tableName="categories" indexName="idx_categories_name_user_id">
+            <column name="name"/>
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

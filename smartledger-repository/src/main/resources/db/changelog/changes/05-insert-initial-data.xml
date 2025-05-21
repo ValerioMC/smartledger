@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="05" author="smartledger">
+        <!-- Insert default roles -->
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+
+        <!-- Insert default categories for income -->
+        <insert tableName="categories">
+            <column name="name" value="Salary"/>
+            <column name="type" value="INCOME"/>
+            <column name="color" value="#4CAF50"/>
+            <column name="icon" value="work"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="name" value="Bonus"/>
+            <column name="type" value="INCOME"/>
+            <column name="color" value="#8BC34A"/>
+            <column name="icon" value="card_giftcard"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="name" value="Investment"/>
+            <column name="type" value="INCOME"/>
+            <column name="color" value="#009688"/>
+            <column name="icon" value="trending_up"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <!-- Insert default categories for expenses -->
+        <insert tableName="categories">
+            <column name="name" value="Food"/>
+            <column name="type" value="EXPENSE"/>
+            <column name="color" value="#F44336"/>
+            <column name="icon" value="restaurant"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="name" value="Transportation"/>
+            <column name="type" value="EXPENSE"/>
+            <column name="color" value="#FF5722"/>
+            <column name="icon" value="directions_car"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="name" value="Housing"/>
+            <column name="type" value="EXPENSE"/>
+            <column name="color" value="#795548"/>
+            <column name="icon" value="home"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="name" value="Entertainment"/>
+            <column name="type" value="EXPENSE"/>
+            <column name="color" value="#9C27B0"/>
+            <column name="icon" value="movie"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="name" value="Shopping"/>
+            <column name="type" value="EXPENSE"/>
+            <column name="color" value="#E91E63"/>
+            <column name="icon" value="shopping_cart"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="categories">
+            <column name="name" value="Utilities"/>
+            <column name="type" value="EXPENSE"/>
+            <column name="color" value="#607D8B"/>
+            <column name="icon" value="power"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+
+        <!-- Insert default category for transfers -->
+        <insert tableName="categories">
+            <column name="name" value="Transfer"/>
+            <column name="type" value="TRANSFER"/>
+            <column name="color" value="#2196F3"/>
+            <column name="icon" value="swap_horiz"/>
+            <column name="created_at" valueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

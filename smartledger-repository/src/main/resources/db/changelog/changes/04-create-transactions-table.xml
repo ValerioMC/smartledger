@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="04" author="smartledger">
+        <!-- Create transactions table -->
+        <createTable tableName="transactions">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="DECIMAL(19,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transaction_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notes" type="VARCHAR(1000)"/>
+            <column name="account_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_transactions_account_id" references="accounts(id)"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints foreignKeyName="fk_transactions_category_id" references="categories(id)"/>
+            </column>
+            <column name="transfer_account_id" type="BIGINT">
+                <constraints foreignKeyName="fk_transactions_transfer_account_id" references="accounts(id)"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP"/>
+        </createTable>
+
+        <!-- Create indexes -->
+        <createIndex tableName="transactions" indexName="idx_transactions_account_id">
+            <column name="account_id"/>
+        </createIndex>
+        <createIndex tableName="transactions" indexName="idx_transactions_category_id">
+            <column name="category_id"/>
+        </createIndex>
+        <createIndex tableName="transactions" indexName="idx_transactions_transfer_account_id">
+            <column name="transfer_account_id"/>
+        </createIndex>
+        <createIndex tableName="transactions" indexName="idx_transactions_transaction_date">
+            <column name="transaction_date"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
